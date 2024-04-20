@@ -2,61 +2,19 @@ import * as React from "react";
 import { Text, StyleSheet, View, TouchableOpacity } from "react-native";
 import { Image } from "react-native";
 import { Button } from "react-native-paper";
-import { RNCamera } from 'react-native-camera';
 import { Color, FontFamily, Border, FontSize } from "../GlobalStyles";
 import { ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Pressable } from "react-native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useNavigation, ParamListBase } from "@react-navigation/native";
-import { useState } from "react";
-import 'react-native-reanimated';
+
 
 
 const Camera = () => {
-  const cameraRef = React.useRef<RNCamera | null>(null);
+
   const navigation = useNavigation<StackNavigationProp<ParamListBase>>();
-  const [isRecording, setIsRecording] = useState(false);
 
-  const handleCapture = async () => {
-    if (cameraRef.current) {
-      if (isRecording) {
-        stopRecording();
-      } else {
-        startRecording();
-      }
-    }
-  };
-
-  const startRecording = async () => {
-    try {
-      console.log('VideoQuality constants are not defined', RNCamera);
-      if (!RNCamera.Constants.VideoQuality) {
-
-        console.error('VideoQuality constants are not defined');
-        return;
-      }
-
-      const options = {
-        quality: RNCamera.Constants.VideoQuality['480p'], // Set video quality
-      };
-      const data = await cameraRef.current?.recordAsync(options);
-      console.log('Recording started:', data?.uri); // Add nullish coalescing operator to provide a default value for 'data' if it is undefined
-      setIsRecording(true);
-    } catch (error) {
-      console.error('Failed to start recording: ', error);
-    }
-  };
-
-
-  const stopRecording = async () => {
-    if (cameraRef.current) {
-      const data: any = await cameraRef.current.stopRecording(); // Update the type of 'data' to 'any'
-      console.log('Recording stopped:', data.uri);
-      setIsRecording(false);
-      // Handle recorded video data here
-    }
-  };
 
   return (
     <ScrollView>
@@ -69,17 +27,12 @@ const Camera = () => {
             resizeMode="stretch"
             source={require("../assets/-icon-leaf.png")}
           />
-          <RNCamera
-            ref={cameraRef}
-            style={styles.cameraPreview}
-            type={RNCamera.Constants.Type.back}
-            autoFocus={RNCamera.Constants.AutoFocus.on}
-          />
+
           <Button
             style={styles.cameraChild}
             mode="contained"
             labelStyle={styles.frameButtonBtn}
-            onPress={handleCapture}
+            onPress={() => console.log("Pressed")}
             contentStyle={styles.frameButtonBtn1}
           >
             Start record

@@ -9,12 +9,9 @@ import { Pressable } from "react-native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useNavigation, ParamListBase } from "@react-navigation/native";
 
-
-
 const Camera = () => {
 
   const navigation = useNavigation<StackNavigationProp<ParamListBase>>();
-
 
   return (
     <ScrollView>
@@ -32,7 +29,7 @@ const Camera = () => {
             style={styles.cameraChild}
             mode="contained"
             labelStyle={styles.frameButtonBtn}
-            onPress={() => console.log("Pressed")}
+            onPress={() => navigation.navigate("openCamera")} // Navigate to "openCamera" screen on press
             contentStyle={styles.frameButtonBtn1}
           >
             Start record

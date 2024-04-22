@@ -16,6 +16,7 @@ import Notification from "./screens/Notification";
 
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { View, Text, Pressable, TouchableOpacity } from "react-native";
+import openCamera from "./screens/openCamera";
 
 const App = () => {
   const [hideSplashScreen, setHideSplashScreen] = React.useState(true);
@@ -78,6 +79,11 @@ const App = () => {
             <Stack.Screen
               name="Notification"
               component={Notification}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="openCamera"
+              component={openCamera}
               options={{ headerShown: false }}
             />
           </Stack.Navigator>
